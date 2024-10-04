@@ -1,0 +1,23 @@
+<div class="app-container">
+    @defer {
+    @if (auth.isAuthenticated() | async) {
+    <app-header
+        #header
+        (menuToggle)="toggleSidebar()"
+        (headerHeight)="onHeaderHeight($event)"
+    ></app-header>
+    <app-footer (footerHeight)="onFooterHeight($event)"></app-footer>
+    <app-sidebar [(visible)]="sidebarVisible"></app-sidebar>
+    }
+    <main
+        class="p-4"
+        #mainRef
+    >
+        <router-outlet></router-outlet>
+        <!-- <div class="h-100">
+        </div> -->
+    </main>
+    } @loading () {
+    <app-auth-pending />
+    }
+</div>
